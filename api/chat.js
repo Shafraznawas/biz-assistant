@@ -3,6 +3,7 @@
 
 const SUPABASE_URL = "https://tsyiwisklhdgijsoibxj.supabase.co";
 const SUPABASE_KEY = "sb_publishable_s5PoS2a2H70WtLhriKDWMw_IiczfAUL";
+const CLAUDE_KEY = process.env.ANTHROPIC_API_KEY || process.env.anthropic_api_key;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -44,7 +45,7 @@ Rules:
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
+        "x-api-key": CLAUDE_KEY,
         "anthropic-version": "2023-06-01"
       },
       body: JSON.stringify({
@@ -68,4 +69,3 @@ Rules:
     return res.status(200).json({ answer: "Sorry, something went wrong. Please try again.", debug: e.message });
   }
 }
-
